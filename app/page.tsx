@@ -95,13 +95,17 @@ export default function Home() {
   const [selectedSurah, setSelectedSurah] = useState(1);
 
   return (
-    <div className="flex h-screen">
-      <div className="w-1/4 border-r overflow-y-auto bg-green-50">
+    <div className="flex flex-col sm:flex-row h-screen sm:overflow-hidden">
+      {/* Sidebar: full width on mobile (just Navbar + the toggle bar
+          rendered inside SurahList — the actual list opens as a drawer),
+          fixed 1/4 column with its own scroll on desktop */}
+      <div className="w-full sm:w-1/4 sm:border-r bg-green-50 sm:overflow-y-auto">
         <Navbar />
         <SurahList onSelect={setSelectedSurah} />
       </div>
 
-      <div className="w-3/4 overflow-y-auto p-4">
+      {/* Main content: takes remaining space, scrolls independently */}
+      <div className="w-full sm:w-3/4 flex-1 overflow-y-auto p-4">
         <AyahList surahNumber={selectedSurah} />
       </div>
     </div>
